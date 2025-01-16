@@ -1,4 +1,5 @@
-﻿using BookStore.DTOs;
+﻿using Domain.DTOs.Book;
+using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
@@ -32,7 +33,6 @@ namespace BookStore.Controllers
 			return Ok(book);
 		}
 
-
 		[HttpPost]
 		public async Task<ActionResult<BookDetailsDto>> CreateBook([FromBody] CreateBookDto createBookDto)
 		{
@@ -53,14 +53,5 @@ namespace BookStore.Controllers
 			await _bookService.DeleteBookAsync(id);
 			return NoContent();
 		}
-	}
-
-	public interface IBookService
-	{
-		Task<List<BookDto>> GetAllBooksAsync();
-		Task<BookDetailsDto> GetBookByIdAsync(int id);
-		Task<BookDetailsDto> CreateBookAsync(CreateBookDto createBookDto);
-		Task UpdateBookAsync(int id, UpdateBookDto updateBookDto);
-		Task DeleteBookAsync(int id);
-	}
+	}	
 }

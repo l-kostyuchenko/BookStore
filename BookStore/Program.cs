@@ -1,5 +1,6 @@
 using BookStore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDependencies();
 
 builder.Services.AddDbContext<BookStoreContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("BookStoreDatabase"))
