@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Infrastructure
+namespace Domain.Entities
 {
-	public class Category
-	{
+    public class BaseEntity
+    {
 		public int Id { get; set; }
-		public string Name { get; set; }
-		public List<Book> Books { get; set; } = new List<Book>();
 	}
 }

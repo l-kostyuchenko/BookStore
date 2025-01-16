@@ -1,6 +1,7 @@
-using BookStore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Application.Extensions;
+using BookStore.Infrastructure.Extensions;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +13,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDependencies();
+builder.Services.AddRepositories();
+builder.Services.AddContextExtension(builder.Configuration);
 
-builder.Services.AddDbContext<BookStoreContext>(options =>
-	options.UseNpgsql(builder.Configuration.GetConnectionString("BookStoreDatabase"))
-		.UseSnakeCaseNamingConvention());
+builder.Services.AddSingleton(provider => new MapperConfiguration(cfg => 
+	{
+		cfg.AddProfile(new Application.Mapper.MappingProfile());
+	})
+	.CreateMapper()
+);
 
 var app = builder.Build();
 

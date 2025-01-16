@@ -10,8 +10,8 @@ namespace Domain.Interfaces.Services
     public interface IBookService
 	{
 		Task<List<BookDto>> GetAllBooksAsync();
-		Task<BookDetailsDto> GetBookByIdAsync(int id);
-		Task<BookDetailsDto> CreateBookAsync(CreateBookDto createBookDto);
+		Task<BookDto> GetBookByIdAsync(int id);
+		Task<BookDto> CreateBookAsync(CreateBookDto createBookDto);
 		Task UpdateBookAsync(int id, UpdateBookDto updateBookDto);
 		Task DeleteBookAsync(int id);
 	}

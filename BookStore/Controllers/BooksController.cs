@@ -23,7 +23,7 @@ namespace BookStore.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<BookDetailsDto>> GetBook(int id)
+		public async Task<ActionResult<BookDto>> GetBook(int id)
 		{
 			var book = await _bookService.GetBookByIdAsync(id);
 			if (book == null)
@@ -34,7 +34,7 @@ namespace BookStore.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<BookDetailsDto>> CreateBook([FromBody] CreateBookDto createBookDto)
+		public async Task<ActionResult<BookDto>> CreateBook([FromBody] CreateBookDto createBookDto)
 		{
 			var createdBook = await _bookService.CreateBookAsync(createBookDto);
 			return CreatedAtAction(nameof(GetBook), new { id = createdBook.Id }, createdBook);

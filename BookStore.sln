@@ -10,6 +10,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore", "BookStore\Book
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Infrastructure", "BookStore.Infrastructure\BookStore.Infrastructure.csproj", "{BF0D7C9B-6FE5-42A2-9A87-7131DE0BC8DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4A095AF9-BC57-43E3-9F1D-AE69119D5193} = {4A095AF9-BC57-43E3-9F1D-AE69119D5193}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A98B1B6E-0623-459F-AE3B-DED79C9A0551}"
 EndProject

@@ -1,92 +1,72 @@
 ﻿using AutoMapper;
-using BookStore.Infrastructure;
 using Domain.DTOs.Book;
 using Domain.Interfaces.Services;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Entities;
+using Domain.Interfaces.Repositories;
 
 namespace Application.Services
 {
 	public class BookService : IBookService
 	{
-		private readonly BookStoreContext _context;
+		private readonly IBookRepository _repository;
 		private readonly IMapper _mapper;
 
-		public BookService(BookStoreContext context, IMapper mapper)
+		public BookService(IBookRepository repository, IMapper mapper)
 		{
-			_context = context;
+			_repository = repository;
 			_mapper = mapper;
 		}
 
 		public async Task<List<BookDto>> GetAllBooksAsync()
 		{
-			var books = await _context.Books
-			.Include(b => b.Categories)
-			.ToListAsync();
+			var books = await _repository.GetAllAsync();
 
 			return _mapper.Map<List<BookDto>>(books);
 		}
 
-		public async Task<BookDetailsDto> GetBookByIdAsync(int id)
+		public async Task<BookDto> GetBookByIdAsync(int id)
 		{
-			var book = await _context.Books
-			.Include(b => b.Categories)
-			.FirstOrDefaultAsync(b => b.Id == id);
+			var book = await _repository.GetByIdAsync(id);
 
-			return _mapper.Map<BookDetailsDto>(book);
+			return _mapper.Map<BookDto>(book);
 		}
 
-		public async Task<BookDetailsDto> CreateBookAsync(CreateBookDto createBookDto)
+		public async Task<BookDto> CreateBookAsync(CreateBookDto createBookDto)
 		{
 			var book = _mapper.Map<Book>(createBookDto);
 
-			if (createBookDto.CategoryIds != null && createBookDto.CategoryIds.Any())
-			{
-				var categories = await _context.Categories
-					.Where(c => createBookDto.CategoryIds.Contains(c.Id))
-					.ToListAsync();
+			//if (createBookDto.CategoryIds != null && createBookDto.CategoryIds.Any())
+			//{
+			//	var categories = await _context.Categories
+			//		.Where(c => createBookDto.CategoryIds.Contains(c.Id))
+			//		.ToListAsync();
 
-				book.Categories.AddRange(categories);
-			}
+			//	book.Categories.AddRange(categories);
+			//}
 
-			_context.Books.Add(book);
-			await _context.SaveChangesAsync();
-			return _mapper.Map<BookDetailsDto>(book);
+			await _repository.CreateAsync(book);
+			return _mapper.Map<BookDto>(book);
 		}
 
 		public async Task UpdateBookAsync(int id, UpdateBookDto updateBookDto)
 		{
-			var book = await _context.Books.FindAsync(id);
-			if (book == null)
-			{
-				return;
-			}
+			var book = _mapper.Map<Book>(updateBookDto);
+						
+			//book.Categories.Clear();
+			//if (updateBookDto.CategoryIds != null && updateBookDto.CategoryIds.Any())
+			//{
+			//	var categories = await _context.Categories
+			//		   .Where(c => updateBookDto.CategoryIds.Contains(c.Id))
+			//		   .ToListAsync();
+			//	book.Categories.AddRange(categories);
+			//}
 
-			_mapper.Map(updateBookDto, book);
-			book.Categories.Clear();
-
-			if (updateBookDto.CategoryIds != null && updateBookDto.CategoryIds.Any())
-			{
-				var categories = await _context.Categories
-					   .Where(c => updateBookDto.CategoryIds.Contains(c.Id))
-					   .ToListAsync();
-				book.Categories.AddRange(categories);
-			}
-			await _context.SaveChangesAsync();
+			await _repository.UpdateAsync(book);
 		}
 
 		public async Task DeleteBookAsync(int id)
 		{
-			var book = await _context.Books.FindAsync(id);
-			if (book != null)
-			{
-				_context.Books.Remove(book);
-				await _context.SaveChangesAsync();
-			}
+			await _repository.DeleteAsync(id);
 		}
 	}
 }

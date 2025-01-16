@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Infrastructure
+namespace Domain.Entities
 {
-	public class OrderItem
+	public class OrderItem : BaseEntity
 	{
-		public int Id { get; set; }
 		public int BookId { get; set; }
 		public Book Book { get; set; }
 		public int Quantity { get; set; }
