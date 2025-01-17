@@ -48,7 +48,7 @@ namespace Application.Services
 			return _mapper.Map<BookDto>(book);
 		}
 
-		public async Task UpdateBookAsync(int id, UpdateBookDto updateBookDto)
+		public async Task UpdateBookAsync(UpdateBookDto updateBookDto)
 		{
 			var book = _mapper.Map<Book>(updateBookDto);
 						

@@ -12,7 +12,7 @@ namespace Domain.Interfaces.Services
 		Task<List<BookDto>> GetAllBooksAsync();
 		Task<BookDto> GetBookByIdAsync(int id);
 		Task<BookDto> CreateBookAsync(CreateBookDto createBookDto);
-		Task UpdateBookAsync(int id, UpdateBookDto updateBookDto);
+		Task UpdateBookAsync(UpdateBookDto updateBookDto);
 		Task DeleteBookAsync(int id);
 	}
 }

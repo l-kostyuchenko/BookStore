@@ -41,9 +41,9 @@ namespace BookStore.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateBook(int id, [FromBody] UpdateBookDto updateBookDto)
+		public async Task<IActionResult> UpdateBook([FromBody] UpdateBookDto updateBookDto)
 		{
-			await _bookService.UpdateBookAsync(id, updateBookDto);
+			await _bookService.UpdateBookAsync(updateBookDto);
 			return NoContent();
 		}
 
