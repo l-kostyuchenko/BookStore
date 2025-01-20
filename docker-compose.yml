@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:17.2-alpine3.20
+    restart: always
+    environment:
+      POSTGRES_DB: "bookstore"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "123"
+    ports:
+      - "5435:5432"
+    volumes:
+      - book-pg-data-user:/var/lib/postgresql/data
+  
+  webapp:
+    container_name: book-store
+    image: img-book-store
+    build:
+      context: .
+      dockerfile: ./BookStore/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ConnectionStrings__BookStoreDatabase=Host=host.docker.internal;Port=5435;Database=bookstore;Username=user;Password=123
+
+volumes:
+    book-pg-data-user:
+  
