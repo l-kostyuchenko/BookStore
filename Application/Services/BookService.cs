@@ -44,7 +44,7 @@ namespace Application.Services
 			//	book.Categories.AddRange(categories);
 			//}
 
-			await _repository.CreateAsync(book);
+			book = await _repository.CreateAsync(book);
 			return _mapper.Map<BookDto>(book);
 		}
 

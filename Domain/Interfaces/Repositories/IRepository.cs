@@ -9,10 +9,10 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IRepository<T> where T : BaseEntity
 	{
-		Task<List<Book>> GetAllAsync();
-		Task<Book> GetByIdAsync(int id);
+		Task<List<T>> GetAllAsync();
+		Task<T> GetByIdAsync(int id);
 		Task DeleteAsync(int id);
-		Task UpdateAsync(Book entity);
-		Task<int> CreateAsync(Book entity);
+		Task UpdateAsync(T entity);
+		Task<T> CreateAsync(T entity);
 	}
 }

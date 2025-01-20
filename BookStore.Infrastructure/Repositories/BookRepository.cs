@@ -56,10 +56,11 @@ namespace BookStore.Infrastructure.Repositories
 			}
 		}
 
-		public async Task<int> CreateAsync(Book entity)
+		public async Task<Book> CreateAsync(Book entity)
 		{
 			_context.Books.Add(entity);
-			return await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync();
+			return entity;
 		}
 	}
 }
