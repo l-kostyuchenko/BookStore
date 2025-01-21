@@ -35,15 +35,6 @@ namespace BookStore.Application.Services
 		{
 			var book = _mapper.Map<Book>(createBookDto);
 
-			//if (createBookDto.CategoryIds != null && createBookDto.CategoryIds.Any())
-			//{
-			//	var categories = await _context.Categories
-			//		.Where(c => createBookDto.CategoryIds.Contains(c.Id))
-			//		.ToListAsync();
-
-			//	book.Categories.AddRange(categories);
-			//}
-
 			book = await _repository.CreateAsync(book);
 			return _mapper.Map<BookDto>(book);
 		}
@@ -51,16 +42,7 @@ namespace BookStore.Application.Services
 		public async Task UpdateBookAsync(UpdateBookDto updateBookDto)
 		{
 			var book = _mapper.Map<Book>(updateBookDto);
-						
-			//book.Categories.Clear();
-			//if (updateBookDto.CategoryIds != null && updateBookDto.CategoryIds.Any())
-			//{
-			//	var categories = await _context.Categories
-			//		   .Where(c => updateBookDto.CategoryIds.Contains(c.Id))
-			//		   .ToListAsync();
-			//	book.Categories.AddRange(categories);
-			//}
-
+			
 			await _repository.UpdateAsync(book);
 		}
 

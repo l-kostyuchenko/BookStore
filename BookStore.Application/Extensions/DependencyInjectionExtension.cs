@@ -8,7 +8,9 @@ namespace BookStore.Application.Extensions
 	{
 		public static void AddDependencies(this IServiceCollection services)
 		{
-			services.AddScoped<IBookService, BookService>();			
+			services.AddScoped<IBookService, BookService>();
+			services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<IOrderService, OrderService>();
 		}
 	}
 }

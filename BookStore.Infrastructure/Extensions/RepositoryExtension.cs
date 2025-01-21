@@ -15,6 +15,8 @@ namespace BookStore.Persistence.Extensions
 		public static void AddRepositories(this IServiceCollection services)
 		{
 			services.AddScoped<IBookRepository, BookRepository>();
+			services.AddScoped<ICategoryRepository, CategoryRepository>();
+			services.AddScoped<IOrderRepository, OrderRepository>();
 		}
 	}
 }
