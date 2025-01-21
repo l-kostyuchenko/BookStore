@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Infrastructure.Configs
+namespace BookStore.Persistence.Configs
 {
 	public class OrderConfig : IEntityTypeConfiguration<Order>
 	{

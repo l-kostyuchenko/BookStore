@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.Infrastructure.Extensions
+namespace BookStore.Persistence.Extensions
 {
     public static class BookStoreContextExtension
     {

@@ -8,7 +8,7 @@ using Domain.Interfaces.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.Infrastructure.Repositories
+namespace BookStore.Persistence.Repositories
 {
 	public class BookRepository : IBookRepository
 	{

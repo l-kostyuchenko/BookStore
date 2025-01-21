@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Infrastructure.Extensions
+namespace BookStore.Persistence.Extensions
 {
 	public static class MigrateExtensions
 	{

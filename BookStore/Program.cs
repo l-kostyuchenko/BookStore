@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Application.Extensions;
-using BookStore.Infrastructure.Extensions;
+using BookStore.Persistence.Extensions;
 using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);

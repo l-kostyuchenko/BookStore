@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 
-namespace BookStore.Infrastructure
+namespace BookStore.Persistence
 {
 	public class BookStoreContext : DbContext
 	{
