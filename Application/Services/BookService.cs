@@ -4,7 +4,7 @@ using BookStore.Domain.Interfaces.Services;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 
-namespace Application.Services
+namespace BookStore.Application.Services
 {
 	public class BookService : IBookService
 	{

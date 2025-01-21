@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AF6A552B-C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Domain", "Domain\BookStore.Domain.csproj", "{4A095AF9-BC57-43E3-9F1D-AE69119D5193}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{40D5C392-05AD-42F1-A0FD-E45602A70C1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Application", "Application\BookStore.Application.csproj", "{40D5C392-05AD-42F1-A0FD-E45602A70C1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

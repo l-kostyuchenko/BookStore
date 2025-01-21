@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace BookStore.Application.Services
 {
 	public class OrderService : IOrderService
 	{

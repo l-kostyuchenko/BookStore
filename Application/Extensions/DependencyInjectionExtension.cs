@@ -1,8 +1,8 @@
-﻿using Application.Services;
+﻿using BookStore.Application.Services;
 using BookStore.Domain.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Extensions
+namespace BookStore.Application.Extensions
 {
 	public static class DependencyInjectionExtension
 	{

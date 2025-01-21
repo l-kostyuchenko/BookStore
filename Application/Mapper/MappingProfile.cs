@@ -4,7 +4,7 @@ using BookStore.Domain.DTOs.Category;
 using BookStore.Domain.DTOs.Order;
 using BookStore.Domain.Entities;
 
-namespace Application.Mapper
+namespace BookStore.Application.Mapper
 {
 	public class MappingProfile : Profile
 	{

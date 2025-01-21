@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Application.Extensions;
+using BookStore.Application.Extensions;
 using BookStore.Persistence.Extensions;
 using AutoMapper;
 
@@ -18,7 +18,7 @@ builder.Services.AddContextExtension(builder.Configuration);
 
 builder.Services.AddSingleton(provider => new MapperConfiguration(cfg => 
 	{
-		cfg.AddProfile(new Application.Mapper.MappingProfile());
+		cfg.AddProfile(new BookStore.Application.Mapper.MappingProfile());
 	})
 	.CreateMapper()
 );
