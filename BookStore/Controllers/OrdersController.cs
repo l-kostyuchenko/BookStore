@@ -2,7 +2,7 @@
 using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookStore.Controllers
+namespace BookStore.Web.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
