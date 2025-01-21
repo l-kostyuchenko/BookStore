@@ -1,11 +1,14 @@
-﻿using BookStore.Domain.DTOs.Book;
+﻿using Asp.Versioning;
+using BookStore.Domain.DTOs.Book;
 using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Web.Controllers
 {
 	[ApiController]
-	[Route("api/[controller]")]
+	[Route("api/v{version:apiVersion}/[controller]")]
+	[ApiVersion("1.0")]
+	[ApiVersion("1.1")]
 	public class BooksController : ControllerBase
 	{
 		private readonly IBookService _bookService;

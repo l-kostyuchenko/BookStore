@@ -1,7 +1,9 @@
-using Microsoft.EntityFrameworkCore;
 using BookStore.Application.Extensions;
 using BookStore.Persistence.Extensions;
 using AutoMapper;
+using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
+using BookStore.Web.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,13 +25,35 @@ builder.Services.AddSingleton(provider => new MapperConfiguration(cfg =>
 	.CreateMapper()
 );
 
+builder.Services.AddApiVersioning(options =>
+{
+	options.ReportApiVersions = true;
+	options.DefaultApiVersion = new ApiVersion(1, 0);
+	options.AssumeDefaultVersionWhenUnspecified = true;
+	options.ApiVersionReader = new UrlSegmentApiVersionReader();
+})
+.AddApiExplorer(options =>
+{
+	options.GroupNameFormat = "'v'VVV";
+	options.SubstituteApiVersionInUrl = true;
+});
+
+builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
-	app.UseSwaggerUI();
+	app.UseSwaggerUI(options =>
+	{
+		var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+		foreach (var description in provider.ApiVersionDescriptions)
+		{
+			options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+		}
+	});
 }
 
 app.UseHttpsRedirection();
