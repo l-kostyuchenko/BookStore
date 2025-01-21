@@ -1,5 +1,5 @@
-﻿using Domain.Entities;
-using Domain.Interfaces.Repositories;
+﻿using BookStore.Domain.Entities;
+using BookStore.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

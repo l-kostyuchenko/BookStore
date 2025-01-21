@@ -1,5 +1,5 @@
-﻿using Domain.DTOs.Order;
-using Domain.Interfaces.Services;
+﻿using BookStore.Domain.DTOs.Order;
+using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers

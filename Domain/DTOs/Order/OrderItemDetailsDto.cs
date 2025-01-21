@@ -1,4 +1,4 @@
-﻿namespace Domain.DTOs.Order
+﻿namespace BookStore.Domain.DTOs.Order
 {
     public class OrderItemDetailsDto
     {

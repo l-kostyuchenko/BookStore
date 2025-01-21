@@ -1,5 +1,5 @@
-﻿using Domain.DTOs.Category;
-using Domain.Interfaces.Services;
+﻿using BookStore.Domain.DTOs.Category;
+using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers

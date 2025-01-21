@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Domain.DTOs.Book;
-using Domain.Interfaces.Services;
-using Domain.Entities;
-using Domain.Interfaces.Repositories;
+using BookStore.Domain.DTOs.Book;
+using BookStore.Domain.Interfaces.Services;
+using BookStore.Domain.Entities;
+using BookStore.Domain.Interfaces.Repositories;
 
 namespace Application.Services
 {

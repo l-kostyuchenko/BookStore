@@ -44,7 +44,7 @@ namespace BookStore.Persistence.Migrations
                     b.ToTable("book_category", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Book", b =>
+            modelBuilder.Entity("BookStore.Domain.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,7 +92,7 @@ namespace BookStore.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Category", b =>
+            modelBuilder.Entity("BookStore.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace BookStore.Persistence.Migrations
                     b.ToTable("categories", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Order", b =>
+            modelBuilder.Entity("BookStore.Domain.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace BookStore.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.OrderItem", b =>
+            modelBuilder.Entity("BookStore.Domain.Entities.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -178,14 +178,14 @@ namespace BookStore.Persistence.Migrations
 
             modelBuilder.Entity("BookCategory", b =>
                 {
-                    b.HasOne("Domain.Entities.Book", null)
+                    b.HasOne("BookStore.Domain.Entities.Book", null)
                         .WithMany()
                         .HasForeignKey("BooksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_book_category_books_books_id");
 
-                    b.HasOne("Domain.Entities.Category", null)
+                    b.HasOne("BookStore.Domain.Entities.Category", null)
                         .WithMany()
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -193,16 +193,16 @@ namespace BookStore.Persistence.Migrations
                         .HasConstraintName("fk_book_category_categories_categories_id");
                 });
 
-            modelBuilder.Entity("Domain.Entities.OrderItem", b =>
+            modelBuilder.Entity("BookStore.Domain.Entities.OrderItem", b =>
                 {
-                    b.HasOne("Domain.Entities.Book", "Book")
+                    b.HasOne("BookStore.Domain.Entities.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_order_items_books_book_id");
 
-                    b.HasOne("Domain.Entities.Order", "Order")
+                    b.HasOne("BookStore.Domain.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -214,7 +214,7 @@ namespace BookStore.Persistence.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Order", b =>
+            modelBuilder.Entity("BookStore.Domain.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });

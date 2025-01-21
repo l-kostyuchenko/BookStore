@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Domain.DTOs.Book;
-using Domain.DTOs.Category;
-using Domain.DTOs.Order;
-using Domain.Entities;
+using BookStore.Domain.DTOs.Book;
+using BookStore.Domain.DTOs.Category;
+using BookStore.Domain.DTOs.Order;
+using BookStore.Domain.Entities;
 
 namespace Application.Mapper
 {

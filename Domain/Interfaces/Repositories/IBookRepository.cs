@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using BookStore.Domain.Entities;
 
-namespace Domain.Interfaces.Repositories
+namespace BookStore.Domain.Interfaces.Repositories
 {
 	public interface IBookRepository : IRepository<Book>
 	{

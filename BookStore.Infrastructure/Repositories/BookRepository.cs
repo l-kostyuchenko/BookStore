@@ -1,11 +1,11 @@
-﻿using Domain.DTOs.Book;
+﻿using BookStore.Domain.DTOs.Book;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Interfaces.Repositories;
-using Domain.Entities;
+using BookStore.Domain.Interfaces.Repositories;
+using BookStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Persistence.Repositories

@@ -1,4 +1,4 @@
-﻿namespace Domain.DTOs.Category
+﻿namespace BookStore.Domain.DTOs.Category
 {
     public class CreateCategoryDto
     {

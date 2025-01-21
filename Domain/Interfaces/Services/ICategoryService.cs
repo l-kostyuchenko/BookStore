@@ -1,11 +1,11 @@
-﻿using Domain.DTOs.Category;
+﻿using BookStore.Domain.DTOs.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces.Services
+namespace BookStore.Domain.Interfaces.Services
 {
 	public interface ICategoryService
 	{

@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using BookStore.Domain.Entities;
 
-namespace Domain.DTOs.Book
+namespace BookStore.Domain.DTOs.Book
 {
     public class CreateBookDto
 	{

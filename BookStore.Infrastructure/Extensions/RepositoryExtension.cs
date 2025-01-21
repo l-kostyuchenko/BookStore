@@ -1,6 +1,6 @@
 ﻿using BookStore.Persistence.Repositories;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using BookStore.Domain.Interfaces.Repositories;
+using BookStore.Domain.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

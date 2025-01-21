@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Domain.DTOs.Book;
-using Domain.DTOs.Category;
-using Domain.DTOs.Order;
-using Domain.Entities;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using BookStore.Domain.DTOs.Book;
+using BookStore.Domain.DTOs.Category;
+using BookStore.Domain.DTOs.Order;
+using BookStore.Domain.Entities;
+using BookStore.Domain.Interfaces.Repositories;
+using BookStore.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
