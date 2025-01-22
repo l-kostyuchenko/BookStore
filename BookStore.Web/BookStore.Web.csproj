@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>c26d36dd-86f9-4766-a915-45616416f90f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>BookStoreAPI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
