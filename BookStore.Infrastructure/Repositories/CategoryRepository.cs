@@ -58,5 +58,12 @@ namespace BookStore.Persistence.Repositories
 				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
+
+		public List<Category> GetByCondition(Func<Category, bool> condition)
+		{
+			var categories = _context.Categories.Where(condition).ToList();
+
+			return categories;
+		}
 	}
 }

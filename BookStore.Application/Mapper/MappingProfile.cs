@@ -21,7 +21,12 @@ namespace BookStore.Application.Mapper
 
 			CreateMap<Order, OrderDto>()
 				.ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems));
-			
+
+			CreateMap<CreateOrderDto, Order>()
+				.ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems));
+
+			CreateMap<OrderItemDto, OrderItem>();
+
 			CreateMap<OrderItem, OrderItemDetailsDto>()
 				.ForMember(dest => dest.BookTitle, opt => opt.MapFrom(src => src.Book.Title))
 				.ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Book.Author));

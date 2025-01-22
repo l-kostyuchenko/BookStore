@@ -9,11 +9,13 @@ namespace BookStore.Application.Services
 	public class BookService : IBookService
 	{
 		private readonly IBookRepository _repository;
+		private readonly ICategoryRepository _categoryRepository;
 		private readonly IMapper _mapper;
 
-		public BookService(IBookRepository repository, IMapper mapper)
+		public BookService(IBookRepository repository, ICategoryRepository categoryRepository, IMapper mapper)
 		{
 			_repository = repository;
+			_categoryRepository = categoryRepository;
 			_mapper = mapper;
 		}
 
@@ -35,6 +37,12 @@ namespace BookStore.Application.Services
 		{
 			var book = _mapper.Map<Book>(createBookDto);
 
+			if (createBookDto.CategoryIds != null && createBookDto.CategoryIds.Any())
+			{
+				var categories = _categoryRepository.GetByCondition(c => createBookDto.CategoryIds.Contains(c.Id));
+				book.Categories.AddRange(categories);
+			}
+
 			book = await _repository.CreateAsync(book, cancellationToken);
 			return _mapper.Map<BookDto>(book);
 		}
@@ -42,7 +50,14 @@ namespace BookStore.Application.Services
 		public async Task UpdateBookAsync(UpdateBookDto updateBookDto, CancellationToken cancellationToken)
 		{
 			var book = _mapper.Map<Book>(updateBookDto);
-			
+
+			book.Categories.Clear();
+			if (updateBookDto.CategoryIds != null && updateBookDto.CategoryIds.Any())
+			{
+				var categories = _categoryRepository.GetByCondition(c => updateBookDto.CategoryIds.Contains(c.Id));
+				book.Categories.AddRange(categories);
+			}
+
 			await _repository.UpdateAsync(book, cancellationToken);
 		}
 
