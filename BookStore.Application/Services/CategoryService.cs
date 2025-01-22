@@ -22,16 +22,16 @@ namespace BookStore.Application.Services
 			_mapper = mapper;
 		}
 
-		public async Task<List<CategoryDto>> GetAllCategoriesAsync()
+		public async Task<List<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken)
 		{
-			var categories = await _repository.GetAllAsync();
+			var categories = await _repository.GetAllAsync(cancellationToken);
 			return _mapper.Map<List<CategoryDto>>(categories);
 		}
 
-		public async Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto)
+		public async Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
 		{
 			var category = _mapper.Map<Category>(createCategoryDto);
-			category = await _repository.CreateAsync(category);
+			category = await _repository.CreateAsync(category, cancellationToken);
 			
 			return _mapper.Map<CategoryDto>(category);
 		}

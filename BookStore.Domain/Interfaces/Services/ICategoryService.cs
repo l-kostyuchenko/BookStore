@@ -9,7 +9,7 @@ namespace BookStore.Domain.Interfaces.Services
 {
 	public interface ICategoryService
 	{
-		Task<List<CategoryDto>> GetAllCategoriesAsync();
-		Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto);
+		Task<List<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken);
+		Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken);
 	}
 }

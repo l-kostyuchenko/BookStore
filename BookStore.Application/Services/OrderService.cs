@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BookStore.Application.Services
@@ -24,17 +25,17 @@ namespace BookStore.Application.Services
 			_mapper = mapper;
 		}
 
-		public async Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto)
+		public async Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto, CancellationToken cancellationToken)
 		{
 			var order = _mapper.Map<Order>(createOrderDto);
-			order = await _repository.CreateAsync(order);
+			order = await _repository.CreateAsync(order, cancellationToken);
 			
 			return _mapper.Map<OrderDto>(order);
 		}
 
-		public async Task<OrderDto> GetOrderByIdAsync(int id)
+		public async Task<OrderDto> GetOrderByIdAsync(int id, CancellationToken cancellationToken)
 		{
-			var order = await _repository.GetByIdAsync(id);
+			var order = await _repository.GetByIdAsync(id, cancellationToken);
 
 			return _mapper.Map<OrderDto>(order);
 		}

@@ -19,47 +19,47 @@ namespace BookStore.Persistence.Repositories
 			_context = context;			
 		}
 
-		public async Task<List<Book>> GetAllAsync()
+		public async Task<List<Book>> GetAllAsync(CancellationToken cancellationToken)
 		{
 			var books = await _context.Books
 				.Include(b => b.Categories)
-				.ToListAsync();
+				.ToListAsync(cancellationToken);
 
 			return books;
 		}
 
-		public async Task<Book> GetByIdAsync(int id)
+		public async Task<Book> GetByIdAsync(int id, CancellationToken cancellationToken)
 		{
 			var book = await _context.Books
 				.Include(b => b.Categories)
-				.FirstOrDefaultAsync(b => b.Id == id);
+				.FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
 			return book;
 		}
 
-		public async Task DeleteAsync(int id)
+		public async Task DeleteAsync(int id, CancellationToken cancellationToken)
 		{
-			var book = await _context.Books.FindAsync(id);
+			var book = await _context.Books.FindAsync(id, cancellationToken);
 			if (book != null)
 			{
 				_context.Books.Remove(book);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task UpdateAsync(Book entity)
+		public async Task UpdateAsync(Book entity, CancellationToken cancellationToken)
 		{
 			if (entity != null)
 			{
 				_context.Books.Update(entity);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task<Book> CreateAsync(Book entity)
+		public async Task<Book> CreateAsync(Book entity, CancellationToken cancellationToken)
 		{
 			_context.Books.Add(entity);
-			await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync(cancellationToken);
 			return entity;
 		}
 	}

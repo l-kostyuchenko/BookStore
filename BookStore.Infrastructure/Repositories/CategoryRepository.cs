@@ -18,44 +18,44 @@ namespace BookStore.Persistence.Repositories
 			_context = context;
 		}
 
-		public async Task<Category> CreateAsync(Category entity)
+		public async Task<Category> CreateAsync(Category entity, CancellationToken cancellationToken)
 		{
 			_context.Categories.Add(entity);
-			await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync(cancellationToken);
 			return entity;
 		}
 
-		public async Task DeleteAsync(int id)
+		public async Task DeleteAsync(int id, CancellationToken cancellationToken)
 		{
-			var category = await _context.Categories.FindAsync(id);
+			var category = await _context.Categories.FindAsync(id, cancellationToken);
 			if (category != null)
 			{
 				_context.Categories.Remove(category);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task<List<Category>> GetAllAsync()
+		public async Task<List<Category>> GetAllAsync(CancellationToken cancellationToken)
 		{
-			var categories = await _context.Categories.ToListAsync();
+			var categories = await _context.Categories.ToListAsync(cancellationToken);
 
 			return categories;
 		}
 
-		public async Task<Category> GetByIdAsync(int id)
+		public async Task<Category> GetByIdAsync(int id, CancellationToken cancellationToken)
 		{
 			var category = await _context.Categories
-				.FirstOrDefaultAsync(b => b.Id == id);
+				.FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
 			return category;
 		}
 
-		public async Task UpdateAsync(Category entity)
+		public async Task UpdateAsync(Category entity, CancellationToken cancellationToken)
 		{
 			if (entity != null)
 			{
 				_context.Categories.Update(entity);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 	}

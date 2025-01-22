@@ -16,17 +16,17 @@ namespace BookStore.Web.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<OrderDto>> CreateOrder([FromBody] CreateOrderDto createOrderDto)
+		public async Task<ActionResult<OrderDto>> CreateOrder([FromBody] CreateOrderDto createOrderDto, CancellationToken cancellationToken)
 		{
-			var createdOrder = await _orderService.CreateOrderAsync(createOrderDto);
+			var createdOrder = await _orderService.CreateOrderAsync(createOrderDto, cancellationToken);
 			return CreatedAtAction(nameof(GetOrder), new { id = createdOrder.Id }, createdOrder);
 
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<OrderDto>> GetOrder(int id)
+		public async Task<ActionResult<OrderDto>> GetOrder(int id, CancellationToken cancellationToken)
 		{
-			var order = await _orderService.GetOrderByIdAsync(id);
+			var order = await _orderService.GetOrderByIdAsync(id, cancellationToken);
 			if (order == null)
 			{
 				return NotFound();

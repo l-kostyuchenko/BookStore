@@ -19,16 +19,16 @@ namespace BookStore.Web.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<BookDto>>> GetBooks()
+		public async Task<ActionResult<IEnumerable<BookDto>>> GetBooks(CancellationToken cancellationToken)
 		{
-			var books = await _bookService.GetAllBooksAsync();
+			var books = await _bookService.GetAllBooksAsync(cancellationToken);
 			return Ok(books);
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<BookDto>> GetBook(int id)
+		public async Task<ActionResult<BookDto>> GetBook(int id, CancellationToken cancellationToken)
 		{
-			var book = await _bookService.GetBookByIdAsync(id);
+			var book = await _bookService.GetBookByIdAsync(id, cancellationToken);
 			if (book == null)
 			{
 				return NotFound();
@@ -37,23 +37,23 @@ namespace BookStore.Web.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<BookDto>> CreateBook([FromBody] CreateBookDto createBookDto)
+		public async Task<ActionResult<BookDto>> CreateBook([FromBody] CreateBookDto createBookDto, CancellationToken cancellationToken)
 		{
-			var createdBook = await _bookService.CreateBookAsync(createBookDto);
+			var createdBook = await _bookService.CreateBookAsync(createBookDto, cancellationToken);
 			return CreatedAtAction(nameof(GetBook), new { id = createdBook.Id }, createdBook);
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateBook([FromBody] UpdateBookDto updateBookDto)
+		public async Task<IActionResult> UpdateBook([FromBody] UpdateBookDto updateBookDto, CancellationToken cancellationToken)
 		{
-			await _bookService.UpdateBookAsync(updateBookDto);
+			await _bookService.UpdateBookAsync(updateBookDto, cancellationToken);
 			return NoContent();
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteBook(int id)
+		public async Task<IActionResult> DeleteBook(int id, CancellationToken cancellationToken)
 		{
-			await _bookService.DeleteBookAsync(id);
+			await _bookService.DeleteBookAsync(id, cancellationToken);
 			return NoContent();
 		}
 	}	

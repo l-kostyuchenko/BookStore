@@ -16,16 +16,16 @@ namespace BookStore.Web.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
+		public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories(CancellationToken cancellationToken)
 		{
-			var categories = await _categoryService.GetAllCategoriesAsync();
+			var categories = await _categoryService.GetAllCategoriesAsync(cancellationToken);
 			return Ok(categories);
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] CreateCategoryDto createCategoryDto)
+		public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
 		{
-			var createdCategory = await _categoryService.CreateCategoryAsync(createCategoryDto);
+			var createdCategory = await _categoryService.CreateCategoryAsync(createCategoryDto, cancellationToken);
 			return CreatedAtAction(nameof(GetCategories), new { id = createdCategory.Id }, createdCategory);
 		}
 	}

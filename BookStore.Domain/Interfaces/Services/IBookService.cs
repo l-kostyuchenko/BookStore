@@ -9,10 +9,10 @@ namespace BookStore.Domain.Interfaces.Services
 {
     public interface IBookService
 	{
-		Task<List<BookDto>> GetAllBooksAsync();
-		Task<BookDto> GetBookByIdAsync(int id);
-		Task<BookDto> CreateBookAsync(CreateBookDto createBookDto);
-		Task UpdateBookAsync(UpdateBookDto updateBookDto);
-		Task DeleteBookAsync(int id);
+		Task<List<BookDto>> GetAllBooksAsync(CancellationToken cancellationToken);
+		Task<BookDto> GetBookByIdAsync(int id, CancellationToken cancellationToken);
+		Task<BookDto> CreateBookAsync(CreateBookDto createBookDto, CancellationToken cancellationToken);
+		Task UpdateBookAsync(UpdateBookDto updateBookDto, CancellationToken cancellationToken);
+		Task DeleteBookAsync(int id, CancellationToken cancellationToken);
 	}
 }

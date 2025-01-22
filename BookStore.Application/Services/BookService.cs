@@ -17,38 +17,38 @@ namespace BookStore.Application.Services
 			_mapper = mapper;
 		}
 
-		public async Task<List<BookDto>> GetAllBooksAsync()
+		public async Task<List<BookDto>> GetAllBooksAsync(CancellationToken cancellationToken)
 		{
-			var books = await _repository.GetAllAsync();
+			var books = await _repository.GetAllAsync(cancellationToken);
 
 			return _mapper.Map<List<BookDto>>(books);
 		}
 
-		public async Task<BookDto> GetBookByIdAsync(int id)
+		public async Task<BookDto> GetBookByIdAsync(int id, CancellationToken cancellationToken)
 		{
-			var book = await _repository.GetByIdAsync(id);
+			var book = await _repository.GetByIdAsync(id, cancellationToken);
 
 			return _mapper.Map<BookDto>(book);
 		}
 
-		public async Task<BookDto> CreateBookAsync(CreateBookDto createBookDto)
+		public async Task<BookDto> CreateBookAsync(CreateBookDto createBookDto, CancellationToken cancellationToken)
 		{
 			var book = _mapper.Map<Book>(createBookDto);
 
-			book = await _repository.CreateAsync(book);
+			book = await _repository.CreateAsync(book, cancellationToken);
 			return _mapper.Map<BookDto>(book);
 		}
 
-		public async Task UpdateBookAsync(UpdateBookDto updateBookDto)
+		public async Task UpdateBookAsync(UpdateBookDto updateBookDto, CancellationToken cancellationToken)
 		{
 			var book = _mapper.Map<Book>(updateBookDto);
 			
-			await _repository.UpdateAsync(book);
+			await _repository.UpdateAsync(book, cancellationToken);
 		}
 
-		public async Task DeleteBookAsync(int id)
+		public async Task DeleteBookAsync(int id, CancellationToken cancellationToken)
 		{
-			await _repository.DeleteAsync(id);
+			await _repository.DeleteAsync(id, cancellationToken);
 		}
 	}
 }
