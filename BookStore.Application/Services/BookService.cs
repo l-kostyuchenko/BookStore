@@ -3,6 +3,7 @@ using BookStore.Domain.Interfaces.Services;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using MapsterMapper;
+using Microsoft.Extensions.Logging;
 
 namespace BookStore.Application.Services
 {
@@ -11,12 +12,15 @@ namespace BookStore.Application.Services
 		private readonly IBookRepository _repository;
 		private readonly ICategoryRepository _categoryRepository;
 		private readonly IMapper _mapper;
+		private readonly ILogger<BookService> _logger;
 
-		public BookService(IBookRepository repository, ICategoryRepository categoryRepository, IMapper mapper)
+		public BookService(IBookRepository repository, ICategoryRepository categoryRepository, 
+			IMapper mapper, ILogger<BookService> logger)
 		{
 			_repository = repository;
 			_categoryRepository = categoryRepository;
 			_mapper = mapper;
+			_logger = logger;
 		}
 
 		public async Task<List<BookDto>> GetAllBooksAsync(CancellationToken cancellationToken)
@@ -44,6 +48,8 @@ namespace BookStore.Application.Services
 			}
 
 			book = await _repository.CreateAsync(book, cancellationToken);
+
+			_logger.LogInformation("Создана книга с ИД=" + book.Id);
 			return _mapper.Map<BookDto>(book);
 		}
 
@@ -64,6 +70,7 @@ namespace BookStore.Application.Services
 		public async Task DeleteBookAsync(int id, CancellationToken cancellationToken)
 		{
 			await _repository.DeleteAsync(id, cancellationToken);
+			_logger.LogInformation("Удалена книга с ИД=" + id);
 		}
 	}
 }

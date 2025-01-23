@@ -1,16 +1,9 @@
-﻿using BookStore.Domain.DTOs.Book;
-using BookStore.Domain.DTOs.Category;
-using BookStore.Domain.DTOs.Order;
+﻿using BookStore.Domain.DTOs.Order;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Interfaces.Services;
 using MapsterMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace BookStore.Application.Services
 {
@@ -18,18 +11,21 @@ namespace BookStore.Application.Services
 	{
 		private readonly IOrderRepository _repository;
 		private readonly IMapper _mapper;
+		private readonly ILogger<OrderService> _logger;
 
-		public OrderService(IOrderRepository repository, IMapper mapper)
+		public OrderService(IOrderRepository repository, IMapper mapper, ILogger<OrderService> logger)
 		{
 			_repository = repository;
 			_mapper = mapper;
+			_logger = logger;
 		}
 
 		public async Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto, CancellationToken cancellationToken)
 		{
 			var order = _mapper.Map<Order>(createOrderDto);
 			order = await _repository.CreateAsync(order, cancellationToken);
-			
+
+			_logger.LogInformation("Создан новый заказ с ИД=" + order.Id);
 			return _mapper.Map<OrderDto>(order);
 		}
 

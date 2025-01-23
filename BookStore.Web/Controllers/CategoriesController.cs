@@ -25,8 +25,15 @@ namespace BookStore.Web.Controllers
 		[HttpPost]
 		public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
 		{
-			var createdCategory = await _categoryService.CreateCategoryAsync(createCategoryDto, cancellationToken);
-			return CreatedAtAction(nameof(GetCategories), new { id = createdCategory.Id }, createdCategory);
+			try
+			{
+				var createdCategory = await _categoryService.CreateCategoryAsync(createCategoryDto, cancellationToken);
+				return CreatedAtAction(nameof(GetCategories), new { id = createdCategory.Id }, createdCategory);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
 	}
 }
