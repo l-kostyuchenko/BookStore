@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using BookStore.Domain.DTOs.Category;
+﻿using BookStore.Domain.DTOs.Category;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Interfaces.Services;
+using MapsterMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;

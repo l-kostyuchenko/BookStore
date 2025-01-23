@@ -1,9 +1,11 @@
 using BookStore.Application.Extensions;
 using BookStore.Persistence.Extensions;
-using AutoMapper;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using BookStore.Web.Configuration;
+using Mapster;
+using MapsterMapper;
+using BookStore.Application.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,13 +26,6 @@ builder.Services.AddDependencies();
 builder.Services.AddRepositories();
 builder.Services.AddContextExtension(builder.Configuration);
 
-builder.Services.AddSingleton(provider => new MapperConfiguration(cfg => 
-	{
-		cfg.AddProfile(new BookStore.Application.Mapper.MappingProfile());
-	})
-	.CreateMapper()
-);
-
 builder.Services.AddApiVersioning(options =>
 {
 	options.ReportApiVersions = true;
@@ -45,6 +40,15 @@ builder.Services.AddApiVersioning(options =>
 });
 
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
+
+builder.Services.AddSingleton(TypeAdapterConfig.GlobalSettings);
+builder.Services.AddSingleton(() =>
+{
+	var config = new TypeAdapterConfig();
+	new RegisterMapper().Register(config);
+	return config;
+});
+builder.Services.AddScoped<IMapper, ServiceMapper>();
 
 var app = builder.Build();
 

@@ -9,6 +9,11 @@ namespace BookStore.Domain.Interfaces.Services
 {
     public interface IBookService
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		Task<List<BookDto>> GetAllBooksAsync(CancellationToken cancellationToken);
 		Task<BookDto> GetBookByIdAsync(int id, CancellationToken cancellationToken);
 		Task<BookDto> CreateBookAsync(CreateBookDto createBookDto, CancellationToken cancellationToken);
