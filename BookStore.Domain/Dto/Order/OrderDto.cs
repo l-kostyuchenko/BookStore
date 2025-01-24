@@ -1,4 +1,4 @@
-﻿namespace BookStore.Domain.DTOs.Order
+﻿namespace BookStore.Domain.Dto.Order
 {
     public class OrderDto
     {

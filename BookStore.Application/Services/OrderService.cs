@@ -1,4 +1,4 @@
-﻿using BookStore.Domain.DTOs.Order;
+﻿using BookStore.Domain.Dto.Order;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Interfaces.Services;
@@ -25,7 +25,7 @@ namespace BookStore.Application.Services
 			var order = _mapper.Map<Order>(createOrderDto);
 			order = await _repository.CreateAsync(order, cancellationToken);
 
-			_logger.LogInformation("Создан новый заказ с ИД=" + order.Id);
+			_logger.LogInformation("Создан новый заказ с ИД={order.Id}", order.Id);
 			return _mapper.Map<OrderDto>(order);
 		}
 

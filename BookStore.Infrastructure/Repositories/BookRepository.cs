@@ -1,10 +1,4 @@
-﻿using BookStore.Domain.DTOs.Book;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookStore.Domain.Interfaces.Repositories;
+﻿using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +17,17 @@ namespace BookStore.Persistence.Repositories
 		{
 			var books = await _context.Books
 				.Include(b => b.Categories)
+				.ToListAsync(cancellationToken);
+
+			return books;
+		}
+
+		public async Task<List<Book>> GetPageAsync(int page, int pageSize, CancellationToken cancellationToken)
+		{
+			var books = await _context.Books
+				.Include(b => b.Categories)
+				.Skip((page - 1) * pageSize)
+				.Take(pageSize)
 				.ToListAsync(cancellationToken);
 
 			return books;

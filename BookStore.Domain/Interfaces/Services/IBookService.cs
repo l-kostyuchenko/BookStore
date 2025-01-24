@@ -1,20 +1,15 @@
-﻿using BookStore.Domain.DTOs.Book;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookStore.Domain.Dto.Book;
 
 namespace BookStore.Domain.Interfaces.Services
 {
-    public interface IBookService
+	public interface IBookService
 	{
 		/// <summary>
-		/// Получить все книги из БД
+		/// Получить книги из БД
 		/// </summary>
 		/// <param name="cancellationToken"></param>
-		/// <returns>Все книги</returns>
-		Task<List<BookDto>> GetAllBooksAsync(CancellationToken cancellationToken);
+		/// <returns>Все книги</returns>		
+		Task<List<BookDto>> GetPageBooksAsync(int page, int pageSize, CancellationToken cancellationToken);
 
 		/// <summary>
 		/// Получить книгу из БД по ИД

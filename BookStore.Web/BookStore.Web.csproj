@@ -7,21 +7,29 @@
     <UserSecretsId>c26d36dd-86f9-4766-a915-45616416f90f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>BookStoreAPI.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DocumentationFile>bin\Debug\BookStore.Web.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591;NU1603</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DocumentationFile>bin\Release\BookStore.Web.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591;NU1603</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
     <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
-    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
-    <PackageReference Include="EntityFrameworkCore.NamingConventions" Version="8.0.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />    
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>

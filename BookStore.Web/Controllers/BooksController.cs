@@ -1,14 +1,14 @@
 ﻿using Asp.Versioning;
-using BookStore.Domain.DTOs.Book;
+using BookStore.Domain.Dto.Book;
 using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using SimpleResults;
 
 namespace BookStore.Web.Controllers
 {
 	[ApiController]
 	[Route("api/v{version:apiVersion}/[controller]")]
 	[ApiVersion("1.0")]
-	[ApiVersion("1.1")]
 	public class BooksController : ControllerBase
 	{
 		private readonly IBookService _bookService;
@@ -19,12 +19,13 @@ namespace BookStore.Web.Controllers
 		}
 
 		/// <summary>
-		/// Получить все книги
+		/// Получить книги по страницам
 		/// </summary>
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<BookDto>>> GetBooks(CancellationToken cancellationToken)
+		public async Task<ActionResult<IEnumerable<BookDto>>> GetBooks([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
 		{
-			var books = await _bookService.GetAllBooksAsync(cancellationToken);
+			var books = await _bookService.GetPageBooksAsync(page, pageSize, cancellationToken);
+
 			return Ok(books);
 		}
 
@@ -51,13 +52,13 @@ namespace BookStore.Web.Controllers
 		public async Task<ActionResult<BookDto>> CreateBook([FromBody] CreateBookDto createBookDto, CancellationToken cancellationToken)
 		{
 			var createdBook = await _bookService.CreateBookAsync(createBookDto, cancellationToken);
-			return CreatedAtAction(nameof(GetBook), new { id = createdBook.Id }, createdBook);
+			return Ok(createdBook);
 		}
 
 		/// <summary>
 		/// Редактирование книги
 		/// </summary>
-		[HttpPut("{id}")]
+		[HttpPut]
 		public async Task<IActionResult> UpdateBook([FromBody] UpdateBookDto updateBookDto, CancellationToken cancellationToken)
 		{
 			await _bookService.UpdateBookAsync(updateBookDto, cancellationToken);

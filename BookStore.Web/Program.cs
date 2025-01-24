@@ -6,24 +6,23 @@ using BookStore.Web.Configuration;
 using Mapster;
 using MapsterMapper;
 using BookStore.Application.Mapper;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
 	var basePath = AppContext.BaseDirectory;
-
-	var xmlPath = Path.Combine(basePath, "BookStoreAPI.xml");
+	var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+	var xmlPath = Path.Combine(basePath, @$"..\{xmlFile}");
 	options.IncludeXmlComments(xmlPath);
 });
 
-builder.Services.AddDependencies();
-builder.Services.AddRepositories();
+builder.Services.AddApplication();
+builder.Services.AddPersistence();
 builder.Services.AddContextExtension(builder.Configuration);
 
 builder.Services.AddApiVersioning(options =>
@@ -41,18 +40,8 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
-builder.Services.AddSingleton(TypeAdapterConfig.GlobalSettings);
-builder.Services.AddSingleton(() =>
-{
-	var config = new TypeAdapterConfig();
-	new RegisterMapper().Register(config);
-	return config;
-});
-builder.Services.AddScoped<IMapper, ServiceMapper>();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();

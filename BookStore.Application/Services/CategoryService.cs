@@ -1,9 +1,10 @@
-﻿using BookStore.Domain.DTOs.Category;
+﻿using BookStore.Domain.Dto.Category;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Interfaces.Services;
 using MapsterMapper;
 using Microsoft.Extensions.Logging;
+using SimpleResults;
 
 namespace BookStore.Application.Services
 {
@@ -26,21 +27,21 @@ namespace BookStore.Application.Services
 			return _mapper.Map<List<CategoryDto>>(categories);
 		}
 
-		public async Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
-		{
-			var category = _mapper.Map<Category>(createCategoryDto);
-
-			var oldCategory = _repository.GetByCondition(x => x.Name == category.Name).FirstOrDefault();
+		public async Task<Result<CategoryDto>> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
+		{			
+			var oldCategory = _repository.GetByCondition(x => x.Name == createCategoryDto.Name).FirstOrDefault();
 			if (oldCategory != null)
 			{
-				_logger.LogError("Данная категория уже существует");
-				throw new InvalidOperationException("Данная категория уже существует");
+				_logger.LogWarning("Категория {oldCategoryName} уже существует", oldCategory.Name);
+				return Result.Invalid($"Категория {oldCategory.Name} уже существует");
 			}
 
+			var category = _mapper.Map<Category>(createCategoryDto);
 			category = await _repository.CreateAsync(category, cancellationToken);
 
-			_logger.LogInformation("Создана категория с ИД=" + category.Id);
-			return _mapper.Map<CategoryDto>(category);
+			_logger.LogInformation("Создана категория с ИД={categoryId}", category.Id);
+			var dto = _mapper.Map<CategoryDto>(category);
+			return Result.Success(dto);
 		}
 	}
 }

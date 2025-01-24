@@ -1,4 +1,4 @@
-﻿using BookStore.Domain.DTOs.Book;
+﻿using BookStore.Domain.Dto.Book;
 using BookStore.Domain.Interfaces.Services;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
@@ -23,9 +23,15 @@ namespace BookStore.Application.Services
 			_logger = logger;
 		}
 
-		public async Task<List<BookDto>> GetAllBooksAsync(CancellationToken cancellationToken)
+		public async Task<List<BookDto>> GetPageBooksAsync(int page, int pageSize, CancellationToken cancellationToken)
 		{
-			var books = await _repository.GetAllAsync(cancellationToken);
+			if (page < 1)
+				page = 1;
+
+			if (pageSize < 1)
+				pageSize = 10;
+
+			var books = await _repository.GetPageAsync(page, pageSize, cancellationToken);
 
 			return _mapper.Map<List<BookDto>>(books);
 		}
@@ -49,7 +55,7 @@ namespace BookStore.Application.Services
 
 			book = await _repository.CreateAsync(book, cancellationToken);
 
-			_logger.LogInformation("Создана книга с ИД=" + book.Id);
+			_logger.LogInformation("Создана книга с ИД={bookId}", book.Id);
 			return _mapper.Map<BookDto>(book);
 		}
 
@@ -70,7 +76,7 @@ namespace BookStore.Application.Services
 		public async Task DeleteBookAsync(int id, CancellationToken cancellationToken)
 		{
 			await _repository.DeleteAsync(id, cancellationToken);
-			_logger.LogInformation("Удалена книга с ИД=" + id);
+			_logger.LogInformation("Удалена книга с ИД={id}", id);
 		}
 	}
 }

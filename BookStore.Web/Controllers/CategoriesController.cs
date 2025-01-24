@@ -1,11 +1,13 @@
-﻿using BookStore.Domain.DTOs.Category;
+﻿using Asp.Versioning;
+using BookStore.Domain.Dto.Category;
 using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Web.Controllers
 {
 	[ApiController]
-	[Route("api/[controller]")]
+	[Route("api/v{version:apiVersion}/[controller]")]
+	[ApiVersion("1.0")]
 	public class CategoriesController : ControllerBase
 	{
 		private readonly ICategoryService _categoryService;
@@ -15,6 +17,11 @@ namespace BookStore.Web.Controllers
 			_categoryService = categoryService;
 		}
 
+		/// <summary>
+		/// Получить все категории
+		/// </summary>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories(CancellationToken cancellationToken)
 		{
@@ -22,18 +29,17 @@ namespace BookStore.Web.Controllers
 			return Ok(categories);
 		}
 
+		/// <summary>
+		/// Создать новую категорию
+		/// </summary>
+		/// <param name="createCategoryDto"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
 		{
-			try
-			{
-				var createdCategory = await _categoryService.CreateCategoryAsync(createCategoryDto, cancellationToken);
-				return CreatedAtAction(nameof(GetCategories), new { id = createdCategory.Id }, createdCategory);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex.Message);
-			}
+			var createdCategory = await _categoryService.CreateCategoryAsync(createCategoryDto, cancellationToken);
+			return Ok(createdCategory);			
 		}
 	}
 }

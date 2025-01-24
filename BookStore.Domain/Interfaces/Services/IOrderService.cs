@@ -1,9 +1,4 @@
-﻿using BookStore.Domain.DTOs.Order;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookStore.Domain.Dto.Order;
 
 namespace BookStore.Domain.Interfaces.Services
 {

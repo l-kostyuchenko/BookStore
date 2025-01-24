@@ -1,8 +1,6 @@
-﻿using BookStore.Domain.Entities;
-
-namespace BookStore.Domain.DTOs.Book
+﻿namespace BookStore.Domain.Dto.Book
 {
-    public class BookDto
+	public class BookDto
 	{
         public int Id { get; set; }
         public string Title { get; set; }

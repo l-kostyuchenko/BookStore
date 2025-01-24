@@ -1,11 +1,6 @@
-﻿using BookStore.Domain.DTOs.Book;
+﻿using BookStore.Domain.Dto.Book;
 using BookStore.Domain.Entities;
 using Mapster;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.Mapper
 {

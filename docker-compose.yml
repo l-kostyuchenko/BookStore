@@ -12,8 +12,8 @@ services:
       - book-pg-data-user:/var/lib/postgresql/data
   
   webapp:
-    container_name: book-store
-    image: img-book-store
+    container_name: book-store-api
+    image: book-store
     build:
       context: .
       dockerfile: ./BookStore.Web/Dockerfile
