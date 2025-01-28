@@ -21,10 +21,10 @@ namespace BookStore.Application.Services
 			_logger = logger;
 		}
 
-		public async Task<List<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken)
+		public async Task<ListedResult<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken)
 		{
 			var categories = await _repository.GetAllAsync(cancellationToken);
-			return _mapper.Map<List<CategoryDto>>(categories);
+			return Result.Success(_mapper.Map<List<CategoryDto>>(categories));
 		}
 
 		public async Task<Result<CategoryDto>> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)

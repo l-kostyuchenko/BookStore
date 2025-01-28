@@ -5,7 +5,7 @@ namespace BookStore.Domain.Interfaces.Services
 {
 	public interface ICategoryService
 	{
-		Task<List<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken);
+		Task<ListedResult<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken);
 		Task<Result<CategoryDto>> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken);
 	}
 }

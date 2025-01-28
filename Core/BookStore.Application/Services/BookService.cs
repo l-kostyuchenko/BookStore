@@ -47,7 +47,7 @@ namespace BookStore.Application.Services
 		{
 			var book = _mapper.Map<Book>(createBookDto);
 
-			if (createBookDto.CategoryIds != null && createBookDto.CategoryIds.Any())
+			if (createBookDto.CategoryIds.Any())
 			{
 				var categories = _categoryRepository.GetByCondition(c => createBookDto.CategoryIds.Contains(c.Id));
 				book.Categories.AddRange(categories);
@@ -64,7 +64,7 @@ namespace BookStore.Application.Services
 			var book = _mapper.Map<Book>(updateBookDto);
 
 			book.Categories.Clear();
-			if (updateBookDto.CategoryIds != null && updateBookDto.CategoryIds.Any())
+			if (updateBookDto.CategoryIds.Any())
 			{
 				var categories = _categoryRepository.GetByCondition(c => updateBookDto.CategoryIds.Contains(c.Id));
 				book.Categories.AddRange(categories);

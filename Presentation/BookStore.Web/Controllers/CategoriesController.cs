@@ -2,6 +2,7 @@
 using BookStore.Domain.Dto.Category;
 using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using SimpleResults;
 
 namespace BookStore.Web.Controllers
 {
@@ -23,10 +24,10 @@ namespace BookStore.Web.Controllers
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories(CancellationToken cancellationToken)
+		public async Task<ListedResult<CategoryDto>> GetCategories(CancellationToken cancellationToken)
 		{
 			var categories = await _categoryService.GetAllCategoriesAsync(cancellationToken);
-			return Ok(categories);
+			return categories;
 		}
 
 		/// <summary>

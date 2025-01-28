@@ -8,7 +8,7 @@
         public string ISBN { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
-        public DateTime PublicationDate { get; set; }
+        public DateTimeOffset PublicationDate { get; set; }
         public List<string> Categories { get; set; }
     }
 }

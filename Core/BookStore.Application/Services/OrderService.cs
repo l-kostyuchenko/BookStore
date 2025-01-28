@@ -4,6 +4,7 @@ using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Interfaces.Services;
 using MapsterMapper;
 using Microsoft.Extensions.Logging;
+using SimpleResults;
 
 namespace BookStore.Application.Services
 {
@@ -20,7 +21,7 @@ namespace BookStore.Application.Services
 			_logger = logger;
 		}
 
-		public async Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto, CancellationToken cancellationToken)
+		public async Task<Result<OrderDto>> CreateOrderAsync(CreateOrderDto createOrderDto, CancellationToken cancellationToken)
 		{
 			var order = _mapper.Map<Order>(createOrderDto);
 			order = await _repository.CreateAsync(order, cancellationToken);
@@ -29,7 +30,7 @@ namespace BookStore.Application.Services
 			return _mapper.Map<OrderDto>(order);
 		}
 
-		public async Task<OrderDto> GetOrderByIdAsync(int id, CancellationToken cancellationToken)
+		public async Task<Result<OrderDto>> GetOrderByIdAsync(int id, CancellationToken cancellationToken)
 		{
 			var order = await _repository.GetByIdAsync(id, cancellationToken);
 

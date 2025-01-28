@@ -2,6 +2,7 @@
 using BookStore.Domain.Dto.Order;
 using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using SimpleResults;
 
 namespace BookStore.Web.Controllers
 {
@@ -26,14 +27,11 @@ namespace BookStore.Web.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<OrderDto>> GetOrder(int id, CancellationToken cancellationToken)
+		public async Task<Result<OrderDto>> GetOrder(int id, CancellationToken cancellationToken)
 		{
 			var order = await _orderService.GetOrderByIdAsync(id, cancellationToken);
-			if (order == null)
-			{
-				return NotFound();
-			}
-			return Ok(order);
+			
+			return order;
 		}
 	}
 }
