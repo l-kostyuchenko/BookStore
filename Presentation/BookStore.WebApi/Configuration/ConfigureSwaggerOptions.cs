@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace BookStore.Web.Configuration
+namespace BookStore.WebApi.Configuration
 {
 	public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
 	{

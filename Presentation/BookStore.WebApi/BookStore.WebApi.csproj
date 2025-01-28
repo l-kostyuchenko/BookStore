@@ -7,15 +7,16 @@
     <UserSecretsId>c26d36dd-86f9-4766-a915-45616416f90f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DocumentationFile>bin\Debug\BookStore.Web.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\BookStore.WebApi.xml</DocumentationFile>
     <NoWarn>1701;1702;1591;NU1603</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DocumentationFile>bin\Release\BookStore.Web.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\BookStore.WebApi.xml</DocumentationFile>
     <NoWarn>1701;1702;1591;NU1603</NoWarn>
   </PropertyGroup>
 

@@ -4,7 +4,7 @@ using BookStore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using SimpleResults;
 
-namespace BookStore.Web.Controllers
+namespace BookStore.WebApi.Controllers
 {
 	[ApiController]
 	[Route("api/v{version:apiVersion}/[controller]")]

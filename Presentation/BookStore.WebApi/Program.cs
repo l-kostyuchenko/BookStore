@@ -2,10 +2,7 @@ using BookStore.Application.Extensions;
 using BookStore.Persistence.Extensions;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
-using BookStore.Web.Configuration;
-using Mapster;
-using MapsterMapper;
-using BookStore.Application.Mapper;
+using BookStore.WebApi.Configuration;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
