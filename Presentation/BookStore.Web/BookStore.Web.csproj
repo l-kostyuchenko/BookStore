@@ -33,9 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookStore.Application\BookStore.Application.csproj" />
-    <ProjectReference Include="..\BookStore.Domain\BookStore.Domain.csproj" />
-    <ProjectReference Include="..\BookStore.Infrastructure\BookStore.Persistence.csproj" />
+    <ProjectReference Include="..\..\Core\BookStore.Application\BookStore.Application.csproj" />
+    <ProjectReference Include="..\..\Core\BookStore.Domain\BookStore.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BookStore.Persistence\BookStore.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

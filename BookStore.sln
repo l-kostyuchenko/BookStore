@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Web", "BookStore.Web\BookStore.Web.csproj", "{2A369630-021B-4489-BF5D-EB4EDF8DC8E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Web", "Presentation\BookStore.Web\BookStore.Web.csproj", "{2A369630-021B-4489-BF5D-EB4EDF8DC8E0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{40D5C392-05AD-42F1-A0FD-E45602A70C1F} = {40D5C392-05AD-42F1-A0FD-E45602A70C1F}
 		{4A095AF9-BC57-43E3-9F1D-AE69119D5193} = {4A095AF9-BC57-43E3-9F1D-AE69119D5193}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Persistence", "BookStore.Infrastructure\BookStore.Persistence.csproj", "{BF0D7C9B-6FE5-42A2-9A87-7131DE0BC8DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Persistence", "Infrastructure\BookStore.Persistence\BookStore.Persistence.csproj", "{BF0D7C9B-6FE5-42A2-9A87-7131DE0BC8DF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4A095AF9-BC57-43E3-9F1D-AE69119D5193} = {4A095AF9-BC57-43E3-9F1D-AE69119D5193}
 	EndProjectSection
@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AF6A552B-C733-4217-ABB6-37628BC78EE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Domain", "BookStore.Domain\BookStore.Domain.csproj", "{4A095AF9-BC57-43E3-9F1D-AE69119D5193}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Domain", "Core\BookStore.Domain\BookStore.Domain.csproj", "{4A095AF9-BC57-43E3-9F1D-AE69119D5193}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Application", "BookStore.Application\BookStore.Application.csproj", "{40D5C392-05AD-42F1-A0FD-E45602A70C1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Application", "Core\BookStore.Application\BookStore.Application.csproj", "{40D5C392-05AD-42F1-A0FD-E45602A70C1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
