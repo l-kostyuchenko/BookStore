@@ -10,18 +10,31 @@ services:
       - "5435:5432"
     volumes:
       - book-pg-data-user:/var/lib/postgresql/data
+    networks:      
+      - store-network
   
   webapp:
     container_name: book-store-api
     image: book-store
     build:
       context: .
-      dockerfile: ./BookStore.Web/Dockerfile
+      dockerfile: ./Presentation/BookStore.WebApi/Dockerfile
     ports:
       - "5001:8080"
     environment:
       - ConnectionStrings__BookStoreDatabase=Host=host.docker.internal;Port=5435;Database=bookstore;Username=user;Password=123
-
+      - Serilog__WriteTo__0__Args__serverUrl=http://host.docker.internal:5341
+    networks:
+      - common-network
+      - store-network
+      
 volumes:
     book-pg-data-user:
+    
+networks:
+  common-network: 
+    name: bookstore_common-network
+    external: true
+  store-network:
+    driver: bridge
   
