@@ -4,6 +4,7 @@ using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using BookStore.WebApi.Configuration;
 using System.Reflection;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ builder.Services.AddSwaggerGen(options =>
 {
 	var basePath = AppContext.BaseDirectory;
 	var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-	var xmlPath = Path.Combine(basePath, @$"..\{xmlFile}");
+	var xmlPath = Path.Combine(basePath,xmlFile);
 	options.IncludeXmlComments(xmlPath);
 });
 
@@ -37,10 +38,17 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
+Log.Logger = new LoggerConfiguration()
+	.ReadFrom.Configuration(builder.Configuration) 
+	.Enrich.FromLogContext() 
+	.CreateLogger();
+
+builder.Host.UseSerilog();
+
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
 	app.UseSwagger();
 	app.UseSwaggerUI(options =>
 	{
@@ -50,7 +58,7 @@ if (app.Environment.IsDevelopment())
 			options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
 		}
 	});
-}
+//}
 
 app.UseHttpsRedirection();
 
