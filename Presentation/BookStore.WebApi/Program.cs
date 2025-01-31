@@ -38,17 +38,14 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
-Log.Logger = new LoggerConfiguration()
-	.ReadFrom.Configuration(builder.Configuration) 
-	.Enrich.FromLogContext() 
-	.CreateLogger();
-
-builder.Host.UseSerilog();
+builder.Host.UseSerilog((context, configuration) =>
+	configuration.ReadFrom.Configuration(context.Configuration)
+		.Enrich.FromLogContext());
 
 var app = builder.Build();
 
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
 	app.UseSwagger();
 	app.UseSwaggerUI(options =>
 	{
@@ -58,7 +55,7 @@ var app = builder.Build();
 			options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
 		}
 	});
-//}
+}
 
 app.UseHttpsRedirection();
 

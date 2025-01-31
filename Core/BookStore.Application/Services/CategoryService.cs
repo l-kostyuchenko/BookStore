@@ -3,7 +3,7 @@ using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Interfaces.Services;
 using MapsterMapper;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using SimpleResults;
 
 namespace BookStore.Application.Services
@@ -12,13 +12,13 @@ namespace BookStore.Application.Services
 	{
 		private readonly ICategoryRepository _repository;
 		private readonly IMapper _mapper;
-		private readonly ILogger<CategoryService> _logger;
+		private readonly ILogger _logger;
 
-		public CategoryService(ICategoryRepository repository, IMapper mapper, ILogger<CategoryService> logger)
+		public CategoryService(ICategoryRepository repository, IMapper mapper, ILogger logger)
 		{
 			_repository = repository;
 			_mapper = mapper;
-			_logger = logger;
+			_logger = logger.ForContext<CategoryService>();
 		}
 
 		public async Task<ListedResult<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken)
@@ -32,14 +32,14 @@ namespace BookStore.Application.Services
 			var oldCategory = _repository.GetByCondition(x => x.Name == createCategoryDto.Name).FirstOrDefault();
 			if (oldCategory != null)
 			{
-				_logger.LogWarning("Категория {oldCategoryName} уже существует", oldCategory.Name);
+				_logger.Warning("Категория {oldCategoryName} уже существует", oldCategory.Name);
 				return Result.Invalid($"Категория {oldCategory.Name} уже существует");
 			}
 
 			var category = _mapper.Map<Category>(createCategoryDto);
 			category = await _repository.CreateAsync(category, cancellationToken);
 
-			_logger.LogInformation("Создана категория с ИД={categoryId}", category.Id);
+			_logger.Information("Создана категория с ИД={categoryId}", category.Id);
 			var dto = _mapper.Map<CategoryDto>(category);
 			return Result.Success(dto);
 		}

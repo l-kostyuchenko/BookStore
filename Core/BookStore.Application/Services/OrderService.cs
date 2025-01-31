@@ -3,7 +3,7 @@ using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using BookStore.Domain.Interfaces.Services;
 using MapsterMapper;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using SimpleResults;
 
 namespace BookStore.Application.Services
@@ -12,13 +12,13 @@ namespace BookStore.Application.Services
 	{
 		private readonly IOrderRepository _repository;
 		private readonly IMapper _mapper;
-		private readonly ILogger<OrderService> _logger;
+		private readonly ILogger _logger;
 
-		public OrderService(IOrderRepository repository, IMapper mapper, ILogger<OrderService> logger)
+		public OrderService(IOrderRepository repository, IMapper mapper, ILogger logger)
 		{
 			_repository = repository;
 			_mapper = mapper;
-			_logger = logger;
+			_logger = logger.ForContext<OrderService>();
 		}
 
 		public async Task<Result<OrderDto>> CreateOrderAsync(CreateOrderDto createOrderDto, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ namespace BookStore.Application.Services
 			var order = _mapper.Map<Order>(createOrderDto);
 			order = await _repository.CreateAsync(order, cancellationToken);
 
-			_logger.LogInformation("Создан новый заказ с ИД={order.Id}", order.Id);
+			_logger.Information("Создан новый заказ с ИД={order.Id}", order.Id);
 			return _mapper.Map<OrderDto>(order);
 		}
 

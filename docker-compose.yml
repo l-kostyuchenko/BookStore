@@ -24,6 +24,7 @@ services:
     environment:
       - ConnectionStrings__BookStoreDatabase=Host=host.docker.internal;Port=5435;Database=bookstore;Username=user;Password=123
       - Serilog__WriteTo__0__Args__serverUrl=http://host.docker.internal:5341
+      - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - common-network
       - store-network
