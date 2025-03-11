@@ -5,6 +5,8 @@ using Asp.Versioning.ApiExplorer;
 using BookStore.WebApi.Configuration;
 using System.Reflection;
 using Serilog;
+using BookStore.Warehouse.Client;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence();
+builder.Services.AddWarehouseClient(builder.Configuration);
 builder.Services.AddContextExtension(builder.Configuration);
 
 builder.Services.AddApiVersioning(options =>

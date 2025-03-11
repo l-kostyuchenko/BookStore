@@ -4,6 +4,8 @@ using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using MapsterMapper;
 using Serilog;
+using BookStore.Warehouse.Client.Interfaces;
+//using Warehouse.Client.Interfaces;
 
 namespace BookStore.Application.Services
 {
@@ -11,15 +13,17 @@ namespace BookStore.Application.Services
 	{
 		private readonly IBookRepository _repository;
 		private readonly ICategoryRepository _categoryRepository;
+		private readonly IWarehouseApi _warehouseApi;
 		private readonly IMapper _mapper;
 		private readonly ILogger _logger;
 
 		public BookService(IBookRepository repository, ICategoryRepository categoryRepository, 
-			IMapper mapper, ILogger logger)
+			IMapper mapper, ILogger logger, IWarehouseApi warehouseApi)
 		{
 			_repository = repository;
 			_categoryRepository = categoryRepository;
 			_mapper = mapper;
+			_warehouseApi = warehouseApi;
 			_logger = logger.ForContext<BookService>();
 		}
 
@@ -56,6 +60,7 @@ namespace BookStore.Application.Services
 			book = await _repository.CreateAsync(book, cancellationToken);
 
 			_logger.Information("Создана книга с ИД={bookId}", book.Id);
+
 			return _mapper.Map<BookDto>(book);
 		}
 
