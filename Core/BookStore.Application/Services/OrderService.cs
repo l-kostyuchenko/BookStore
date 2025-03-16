@@ -34,7 +34,7 @@ namespace BookStore.Application.Services
 			_logger.Information("Создан новый заказ с ИД={order.Id}", order.Id);
 
 			var warehouseOrderDto = _mapper.Map<BookStore.Warehouse.Client.Dtos.OrderDto>(order);		
-			_warehouseService.ProcessOrder(warehouseOrderDto);
+			var result = _warehouseService.ProcessOrder(warehouseOrderDto);
 
 			return _mapper.Map<OrderDto>(order);
 		}
