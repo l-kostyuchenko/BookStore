@@ -10,5 +10,7 @@
         public string Description { get; set; }
         public DateTimeOffset PublicationDate { get; set; }
         public List<string> Categories { get; set; }
-    }
+
+		public int WarehouseCount { get; set; }
+	}
 }

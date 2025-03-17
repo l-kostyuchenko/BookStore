@@ -40,6 +40,7 @@ namespace BookStore.WebApi.Controllers
 			{
 				return NotFound();
 			}
+
 			return Ok(book);
 		}
 

@@ -5,6 +5,7 @@ using BookStore.Domain.Interfaces.Repositories;
 using MapsterMapper;
 using Serilog;
 using BookStore.Warehouse.Client.Interfaces;
+using BookStore.Warehouse.Client.Services;
 //using Warehouse.Client.Interfaces;
 
 namespace BookStore.Application.Services
@@ -13,17 +14,17 @@ namespace BookStore.Application.Services
 	{
 		private readonly IBookRepository _repository;
 		private readonly ICategoryRepository _categoryRepository;
-		private readonly IWarehouseApi _warehouseApi;
+		private readonly IWarehouseService _warehouseService;
 		private readonly IMapper _mapper;
 		private readonly ILogger _logger;
 
 		public BookService(IBookRepository repository, ICategoryRepository categoryRepository, 
-			IMapper mapper, ILogger logger, IWarehouseApi warehouseApi)
+			IMapper mapper, ILogger logger, IWarehouseService warehouseService)
 		{
 			_repository = repository;
 			_categoryRepository = categoryRepository;
 			_mapper = mapper;
-			_warehouseApi = warehouseApi;
+			_warehouseService = warehouseService;
 			_logger = logger.ForContext<BookService>();
 		}
 
@@ -44,7 +45,12 @@ namespace BookStore.Application.Services
 		{
 			var book = await _repository.GetByIdAsync(id, cancellationToken);
 
-			return _mapper.Map<BookDto>(book);
+			var bookDto = _mapper.Map<BookDto>(book);
+
+			Task<Skreet2k.Common.Models.Result<int>> result = _warehouseService.GetBookCount(id);
+			bookDto.WarehouseCount = result.Result.Content;
+
+			return bookDto;
 		}
 
 		public async Task<BookDto> CreateBookAsync(CreateBookDto createBookDto, CancellationToken cancellationToken)
