@@ -23,7 +23,8 @@
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
     <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
-    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />    
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+    <PackageReference Include="BookStore.Warehouse.Client" Version="1.0.0" />    
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />    
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />    
     <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.1.2" />    
@@ -38,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\WarehouseService\BookStore.Warehouse.Client\BookStore.Warehouse.Client.csproj" />
     <ProjectReference Include="..\..\Core\BookStore.Application\BookStore.Application.csproj" />
     <ProjectReference Include="..\..\Core\BookStore.Domain\BookStore.Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\BookStore.Persistence\BookStore.Persistence.csproj" />
